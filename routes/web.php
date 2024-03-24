@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\PropertyType;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,3 +53,9 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 }); //end of group agent middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::resource('propertyTypes', PropertyTypeController::class);
+});
